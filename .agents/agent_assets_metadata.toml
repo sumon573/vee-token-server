@@ -6,3 +6,9 @@ id = "2nbQB7oO23nF40ZYyl5-n"
 uri = "file://vee-project-final.zip"
 type = "unspecified"
 title = "Vee Voice Room — Updated Project (all fixes + real-time listener count)"
+
+[[outputs]]
+id = "89Jw8wDgkHiHtQpmBphmq"
+uri = "file://vee-project-final-v2.zip"
+type = "unspecified"
+title = "Vee Project - Final v2 (EAS Build Fixed)"
