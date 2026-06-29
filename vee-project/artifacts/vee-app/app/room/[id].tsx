@@ -49,7 +49,7 @@ export default function RoomScreen() {
   const { user } = useAuth();
   const {
     currentRoom, messages, isMicEnabled, isInSeat, mySeatIndex, myRoomRole, pkTimeLeft,
-    handRaiseRequests, activePolls, reactions, isHandRaised,
+    handRaiseRequests, activePolls, reactions, isHandRaised, liveMembers,
     joinRoom, leaveRoom, takeSeat, leaveSeat, toggleMic, sendMessage,
     lockSeat, kickFromSeat, muteSeat, unmuteSeat, forceMicDown,
     promoteToRoomAdmin, demoteFromRoomAdmin,
@@ -253,7 +253,7 @@ export default function RoomScreen() {
             <Feather name="hash" size={10} color="rgba(255,255,255,0.7)" />
             <Text style={styles.roomSub}>{currentRoom.id}</Text>
             <Feather name="users" size={11} color="rgba(255,255,255,0.7)" />
-            <Text style={styles.roomSub}>{currentRoom.listenerCount}</Text>
+            <Text style={styles.roomSub}>{liveMembers.length}</Text>
             {currentRoom.topic ? (
               <Text style={styles.roomTopic} numberOfLines={1}>· {currentRoom.topic}</Text>
             ) : null}
@@ -904,7 +904,7 @@ export default function RoomScreen() {
           </View>
           <InfoRow label="Room number" value={`#${currentRoom.id}`} colors={colors} />
           {currentRoom.topic ? <InfoRow label="Topic" value={currentRoom.topic} colors={colors} /> : null}
-          <InfoRow label="Listeners" value={String(currentRoom.listenerCount)} colors={colors} />
+          <InfoRow label="Listeners" value={String(liveMembers.length)} colors={colors} />
           {currentRoom.tags.length > 0 ? <InfoRow label="Tags" value={currentRoom.tags.join(", ")} colors={colors} /> : null}
 
           {/* Seated Members List */}
