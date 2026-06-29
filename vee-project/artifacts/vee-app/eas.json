@@ -1,0 +1,44 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "requireCommit": false
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "PNPM_FLAGS": "--no-frozen-lockfile",
+        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://1c4a89d5-012a-4e32-9e9f-a4d92f838041-00-3r9r5dmgtfhy2.sisko.replit.dev/api"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": false
+      },
+      "env": {
+        "PNPM_FLAGS": "--no-frozen-lockfile",
+        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://1c4a89d5-012a-4e32-9e9f-a4d92f838041-00-3r9r5dmgtfhy2.sisko.replit.dev/api"
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "env": {
+        "PNPM_FLAGS": "--no-frozen-lockfile",
+        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://1c4a89d5-012a-4e32-9e9f-a4d92f838041-00-3r9r5dmgtfhy2.sisko.replit.dev/api"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
