@@ -12,3 +12,9 @@ id = "89Jw8wDgkHiHtQpmBphmq"
 uri = "file://vee-project-final-v2.zip"
 type = "unspecified"
 title = "Vee Project - Final v2 (EAS Build Fixed)"
+
+[[outputs]]
+id = "Ii_DRW_RBpX4xke6ZRxxi"
+uri = "file://vee-project-production-ready.zip"
+type = "unspecified"
+title = "Vee - Production Ready (expo-doctor 18/18 ✅)"

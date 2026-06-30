@@ -13,7 +13,7 @@
       },
       "env": {
         "PNPM_FLAGS": "--no-frozen-lockfile",
-        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://1c4a89d5-012a-4e32-9e9f-a4d92f838041-00-3r9r5dmgtfhy2.sisko.replit.dev/api"
+        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://your-vercel-project.vercel.app/api"
       }
     },
     "preview": {
@@ -26,7 +26,7 @@
       },
       "env": {
         "PNPM_FLAGS": "--no-frozen-lockfile",
-        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://1c4a89d5-012a-4e32-9e9f-a4d92f838041-00-3r9r5dmgtfhy2.sisko.replit.dev/api"
+        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://your-vercel-project.vercel.app/api"
       }
     },
     "production": {
@@ -35,7 +35,7 @@
       },
       "env": {
         "PNPM_FLAGS": "--no-frozen-lockfile",
-        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://1c4a89d5-012a-4e32-9e9f-a4d92f838041-00-3r9r5dmgtfhy2.sisko.replit.dev/api"
+        "EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL": "https://your-vercel-project.vercel.app/api"
       }
     }
   },

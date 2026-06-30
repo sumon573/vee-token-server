@@ -1,0 +1,12 @@
+{
+  "name": "vee-token-server",
+  "version": "1.0.0",
+  "description": "Production-ready Vercel Serverless Agora RTC token server for Vee Voice Room",
+  "private": true,
+  "engines": {
+    "node": ">=18.x"
+  },
+  "dependencies": {
+    "agora-access-token": "^2.0.4"
+  }
+}

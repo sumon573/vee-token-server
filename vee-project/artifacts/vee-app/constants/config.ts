@@ -17,13 +17,21 @@ export const FIREBASE_CONFIG = {
 };
 
 // Agora RTC credentials.
-// EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL is set via EAS environment variables.
-// Fallback is the deployed Replit API server URL.
+// EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL must be set via EAS environment variables
+// or in eas.json. Set it to your deployed Vercel token server URL.
+// Example: https://your-project.vercel.app/api
+const tokenServerUrl = process.env.EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL;
+
+if (!tokenServerUrl && __DEV__) {
+  console.warn(
+    "[Vee] EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL is not set. " +
+    "Voice rooms will not work. Set it in eas.json or the EAS dashboard."
+  );
+}
+
 export const AGORA = {
   appId: process.env.EXPO_PUBLIC_AGORA_APP_ID ?? "1fa2a7a0c8424c0ab2c69db4d4ddb673",
-  tokenServerUrl:
-    process.env.EXPO_PUBLIC_AGORA_TOKEN_SERVER_URL ??
-    "https://1c4a89d5-012a-4e32-9e9f-a4d92f838041-00-3r9r5dmgtfhy2.sisko.replit.dev/api",
+  tokenServerUrl: tokenServerUrl ?? "",
 };
 
 export const ONESIGNAL = {
