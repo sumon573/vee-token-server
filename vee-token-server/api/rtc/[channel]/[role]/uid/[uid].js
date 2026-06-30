@@ -1,5 +1,8 @@
 const { RtcTokenBuilder, RtcRole } = require("agora-access-token");
 
+const ALLOWED_ROLES = new Set(["publisher", "subscriber"]);
+const CHANNEL_RE = /^[a-zA-Z0-9!#$%&()*+,\-.:;<=>?@[\]^_{|}~\s]{1,64}$/;
+
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
@@ -17,18 +20,33 @@ module.exports = async function handler(req, res) {
   const APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE;
 
   if (!APP_ID || !APP_CERTIFICATE) {
-    return res.status(500).json({ error: "Server configuration error: missing Agora credentials" });
+    console.error("Missing AGORA_APP_ID or AGORA_APP_CERTIFICATE env vars");
+    return res.status(500).json({ error: "Server configuration error" });
   }
 
   const { channel, role, uid } = req.query;
 
-  if (!channel || !role || !uid) {
-    return res.status(400).json({ error: "Missing required parameters: channel, role, uid" });
+  if (!channel || typeof channel !== "string") {
+    return res.status(400).json({ error: "Missing or invalid parameter: channel" });
+  }
+  if (!CHANNEL_RE.test(channel)) {
+    return res.status(400).json({ error: "Invalid channel name" });
+  }
+  if (!role || !ALLOWED_ROLES.has(role)) {
+    return res.status(400).json({ error: "Invalid role. Must be 'publisher' or 'subscriber'" });
+  }
+  if (!uid) {
+    return res.status(400).json({ error: "Missing parameter: uid" });
+  }
+
+  const numericUid = parseInt(uid, 10);
+  if (isNaN(numericUid) || numericUid < 0) {
+    return res.status(400).json({ error: "Invalid uid. Must be a non-negative integer" });
   }
 
   const rtcRole = role === "publisher" ? RtcRole.PUBLISHER : RtcRole.SUBSCRIBER;
-  const expireTime = Math.floor(Date.now() / 1000) + 3600;
-  const numericUid = parseInt(uid, 10) || 0;
+  const now = Math.floor(Date.now() / 1000);
+  const expireTime = now + 3600;
 
   try {
     const token = RtcTokenBuilder.buildTokenWithUid(
@@ -46,9 +64,10 @@ module.exports = async function handler(req, res) {
       uid: numericUid,
       channel,
       role,
+      expiresAt: expireTime,
     });
   } catch (error) {
-    console.error("Token generation error:", error);
+    console.error("Agora token generation error:", error.message);
     return res.status(500).json({ error: "Failed to generate Agora token" });
   }
 };

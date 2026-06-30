@@ -18,3 +18,9 @@ id = "Ii_DRW_RBpX4xke6ZRxxi"
 uri = "file://vee-project-production-ready.zip"
 type = "unspecified"
 title = "Vee - Production Ready (expo-doctor 18/18 ✅)"
+
+[[outputs]]
+id = "2wIuqHZK8f6twB0g1V8K4"
+uri = "file://vee-production-final.zip"
+type = "unspecified"
+title = "Vee - Production Final (All Audits Passed)"
