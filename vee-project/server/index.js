@@ -11,11 +11,15 @@ const APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || "bb33638a31244873b8
 
 const TOKEN_EXPIRY_SECONDS = 3600;
 
-app.get("/", (req, res) => {
-  res.json({ status: "ok", service: "Vee Agora Token Server" });
+app.get(["/", "/api/health"], (req, res) => {
+  res.json({
+    status: "ok",
+    service: "Vee Agora Token Server",
+    timestamp: new Date().toISOString()
+  });
 });
 
-app.get("/rtc/:channel/:role/:tokentype/:uid", (req, res) => {
+app.get("/api/rtc/:channel/:role/:tokentype/:uid", (req, res) => {
   const { channel, role, tokentype, uid } = req.params;
 
   if (!channel || !role || !tokentype || !uid) {
@@ -57,8 +61,13 @@ app.get("/rtc/:channel/:role/:tokentype/:uid", (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Agora token server running on port ${PORT}`);
-  console.log(`Token endpoint: GET /rtc/:channel/:role/:tokentype/:uid`);
-});
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Agora token server running on port ${PORT}`);
+    console.log(`Health: GET /api/health`);
+    console.log(`Token: GET /api/rtc/:channel/:role/:tokentype/:uid`);
+  });
+}
+
+module.exports = app;
